@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web BLE 安全機制與權限規範 | Start 02</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Web BLE 安全中心</h1>
+            <p class="subtitle">單元 02：安全機制與精準過濾實踐</p>
+        </header>
+
+        <div id="https-warning" class="security-banner error">
+            <span>⚠️</span>
+            <p><strong>安全性警告：</strong> Web Bluetooth 僅能在 HTTPS 環境下運作。目前的連線環境不符合安全規範。</p>
+        </div>
+
+        <div id="gesture-warning" class="security-banner warning">
+            <span>ℹ️</span>
+            <p><strong>提示：</strong> 瀏覽器規定必須由「使用者手勢」（如點擊按鈕）觸發連線視窗。</p>
+        </div>
+
+        <div class="control-panel">
+            <div class="status-indicator">
+                <div id="status-dot" class="dot"></div>
+                <span id="status-text">準備就緒</span>
+            </div>
+
+            <button id="connect-btn" class="btn-connect">
+                <span class="icon">📡</span>
+                <span>連線至設備</span>
+            </button>
+
+            <div id="device-card" class="device-info">
+                <div class="info-item">
+                    <span class="info-label">設備名稱</span>
+                    <span id="device-name" class="info-value">--</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">設備 ID</span>
+                    <span id="device-id" class="info-value">--</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">連線狀態</span>
+                    <span id="connection-state" class="info-value">已連線</span>
+                </div>
+            </div>
+
+            <div id="error-display" class="error-log">
+                <!-- 錯誤訊息將顯示在此 -->
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2024 Vibe Coding Classroom - BLE Security Unit</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // 立即執行 HTTPS 檢測
+        if (window.location.protocol !== 'https:' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+            document.getElementById('https-warning').style.display = 'flex';
+            document.getElementById('connect-btn').disabled = true;
+        } else {
+            document.getElementById('https-warning').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

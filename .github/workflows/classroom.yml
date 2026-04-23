@@ -1,0 +1,74 @@
+name: GitHub Classroom Autograding
+on:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  grading:
+    name: Autograding
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 1: 基礎檔案檢查
+      - name: Check Essential Files
+        id: check-files
+        uses: education/autograding-command-grader@v1
+        with:
+          test-name: "基礎檔案檢查"
+          setup-command: ""
+          command: "bash .github/scripts/check_assignment.sh files"
+          timeout: 1
+          max-score: 20
+
+      # Step 2: 安全邏輯檢查 (try-catch & error handling)
+      - name: Check Security Logic
+        id: check-logic
+        uses: education/autograding-command-grader@v1
+        with:
+          test-name: "安全邏輯檢查"
+          setup-command: ""
+          command: "bash .github/scripts/check_assignment.sh logic"
+          timeout: 1
+          max-score: 30
+
+      # Step 3: 精準過濾檢查
+      - name: Check Precision Filtering
+        id: check-filters
+        uses: education/autograding-command-grader@v1
+        with:
+          test-name: "精準過濾檢查"
+          setup-command: ""
+          command: "bash .github/scripts/check_assignment.sh filters"
+          timeout: 1
+          max-score: 30
+
+      # Step 4: 截圖檢查
+      - name: Check Screenshots
+        id: check-screenshots
+        uses: education/autograding-command-grader@v1
+        with:
+          test-name: "截圖檢查"
+          setup-command: ""
+          command: "bash .github/scripts/check_assignment.sh screenshots"
+          timeout: 1
+          max-score: 20
+
+      # 總結評分報告
+      - name: Autograding Reporter
+        uses: education/autograding-grading-reporter@v1
+        env:
+          CHECK-FILES_RESULTS: "${{steps.check-files.outputs.result}}"
+          CHECK-LOGIC_RESULTS: "${{steps.check-logic.outputs.result}}"
+          CHECK-FILTERS_RESULTS: "${{steps.check-filters.outputs.result}}"
+          CHECK-SCREENSHOTS_RESULTS: "${{steps.check-screenshots.outputs.result}}"
+        with:
+          runners: check-files,check-logic,check-filters,check-screenshots
