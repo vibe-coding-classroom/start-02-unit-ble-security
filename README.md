@@ -1,5 +1,3 @@
-Viewed start-02-unit-ble-security.html:1-492
-
 針對 **`start-02-unit-ble-security` (Web BLE 安全機制與權限規範)** 單元，這是學員從「能動就好」進化為「安全開發」的必經之路。它要求學員具備 **網路安全與隱私保護 (Security & Privacy)** 的意識，理解 Web Bluetooth API 在瀏覽器沙箱中的各項限制（如 HTTPS、User Gesture 與設備過濾），並學習如何在多人高干擾環境下保護使用者的通訊主權。
 
 以下是在 **GitHub Classroom** 部署其作業 (Assignments) 的具體建議：
